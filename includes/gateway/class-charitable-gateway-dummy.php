@@ -65,6 +65,9 @@ if ( ! class_exists( 'Charitable_Gateway_Dummy' ) ) :
 			$this->supports = array(
 				'1.3.0',
 				'recurring',
+				'recurring_cancel',
+				'recurring_suspend',
+				'recurring_reactivate'
 			);
 
 		}

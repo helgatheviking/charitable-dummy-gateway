@@ -2,7 +2,7 @@
 /**
  * Add recurring donations support.
  *
- * @version     1.0.0
+ * @version     1.0.1
  * @package     Charitable Dummy/Classes/Charitable_Dummy_Recurring
  * @author      Kathy Darling
  * @copyright   Copyright (c) 2018, Kathy Darling
@@ -108,6 +108,90 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 
 			return $wpdb->get_var( $wpdb->prepare( $sql, $transaction_id ) );
 
+		}
+
+		/**
+		 * Determines if the donation can be suspended
+		 *
+		 * @param   bool $can
+		 * @param   obj Charitable_Recurring_Donation $donation
+		 * @return  boolean
+		 * @access  public
+		 * @since   1.0.1
+		 */
+		public function can_suspend( $can, $donation ) {
+			if( $donation->get_gateway() === 'dummy' && ! empty( $donation->get_gateway_subscription_id() ) && charitable_recurring_is_approved_status( $donation->get_status() ) ) {
+				$can = true;
+			}
+			return $can;
+		}
+
+		/**
+		 * Suspends a recurring donation.
+		 *
+		 * @param   obj Charitable_Recurring_Donation $donation
+		 * @return  boolean
+		 * @access  public
+		 * @since   1.0.1
+		 */
+		public function suspend( $donation ) {
+			return true;
+		}
+
+		/**
+		 * Determines if the donation can be cancelled
+		 *
+		 * @param   bool $can
+		 * @param   obj Charitable_Recurring_Donation $donation
+		 * @return  boolean
+		 * @access  public
+		 * @since   1.0.1
+		 */
+		public function can_cancel( $can, $donation ) {
+			if( $donation->get_gateway() === 'dummy' && ! empty( $donation->get_gateway_subscription_id() ) && charitable_recurring_is_cancellable_status( $donation->get_status() ) ) {
+				$can = true;
+			}
+			return $can;
+		}
+
+		/**
+		 * Cancels a recurring donation.
+		 *
+		 * @param   obj Charitable_Recurring_Donation $donation
+		 * @return  boolean
+		 * @access  public
+		 * @since   1.0.1
+		 */
+		public function cancel( $donation ) {
+			return true;
+		}
+
+		/**
+		 * Determines if the donation can be reactivated
+		 *
+		 * @param   bool $can
+		 * @param   obj Charitable_Recurring_Donation $donation
+		 * @return  boolean
+		 * @access  public
+		 * @since   1.0.1
+		 */
+		public function can_reactivate( $can, $donation ) {
+			if( $donation->get_gateway() === 'dummy' && ! empty( $donation->get_gateway_subscription_id() ) && 'charitable-suspended' == $donation->get_status() ) {
+				$can = true;
+			}
+			return $can;
+		}
+
+		/**
+		 * Reactivates a recurring donation.
+		 *
+		 * @param   obj Charitable_Recurring_Donation $donation
+		 * @return  boolean
+		 * @access  public
+		 * @since   1.0.1
+		 */
+		public function reactivate( $donation ) {
+			return true;
 		}
 
 	}
