@@ -2,7 +2,7 @@
 /**
  * Add recurring donations support.
  *
- * @version     1.2.0
+ * @version     1.0.0
  * @package     Charitable Dummy/Classes/Charitable_Dummy_Recurring
  * @author      Kathy Darling
  * @copyright   Copyright (c) 2018, Kathy Darling
@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 	/**
 	 * Dummy Payment Gateway support
 	 *
-	 * @since       1.2.0
+	 * @since       1.0.0
 	 */
 	class Charitable_Dummy_Recurring {
 
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 *
 		 * @return  Charitable_Dummy_Recurring
 		 * @access  public
-		 * @since   1.2.0
+		 * @since   1.0.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @param   Charitable_Donation_Processor $processor The Donation Processor helper.
 		 * @return  boolean
 		 * @access  public
-		 * @since   1.2.0
+		 * @since   1.0.0
 		 */
 		public function maybe_process_recurring_donation( $return, $donation_id, Charitable_Donation_Processor $processor ) {
 
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @param 	string $transaction_id The gateway transaction ID.
 		 * @return  int|null
 		 * @access  private
-		 * @since   1.2.0
+		 * @since   1.0.0
 		 */
 		private function get_donation_by_gateway_transaction_id( $transaction_id ) {
 

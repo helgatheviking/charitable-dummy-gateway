@@ -5,7 +5,7 @@
  * Action/filter hooks used for adding support for recurring donations to Dummy gateway.
  *
  * @package     Charitable Dummy/Functions/Recurring Donations
- * @version     1.2.0
+ * @version     1.0.1
  * @author      Kathy Darling
  * @copyright   Copyright (c) 2018, Kathy Darling
  * @license     http://opensource.org/licenses/gpl-3.0.php GNU Public License
