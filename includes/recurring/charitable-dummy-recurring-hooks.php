@@ -40,7 +40,7 @@ add_filter( 'charitable_recurring_can_suspend', array( Charitable_Dummy_Recurrin
  *
  * @see     Charitable_Dummy_Recurring::suspend()
  */
-add_filter( 'charitable_recurring_suspend_dummy_donation', array( Charitable_Dummy_Recurring::get_instance(), 'suspend' ) );
+add_action( 'charitable_recurring_suspend_dummy_donation', array( Charitable_Dummy_Recurring::get_instance(), 'suspend' ) );
 
 /**
  * Donation can be cancelled in gateway.
@@ -54,7 +54,7 @@ add_filter( 'charitable_recurring_can_cancel', array( Charitable_Dummy_Recurring
  *
  * @see     Charitable_Dummy_Recurring::cancel()
  */
-add_filter( 'charitable_recurring_cancel_dummy_donation', array( Charitable_Dummy_Recurring::get_instance(), 'cancel' ) );
+add_action( 'charitable_recurring_cancel_dummy_donation', array( Charitable_Dummy_Recurring::get_instance(), 'cancel' ) );
 
 /**
  * Donation can be reactivated in gateway.
@@ -68,4 +68,4 @@ add_filter( 'charitable_recurring_can_reactivate', array( Charitable_Dummy_Recur
  *
  * @see     Charitable_Dummy_Recurring::reactivate()
  */
-add_filter( 'charitable_recurring_reactivate_dummy_donation', array( Charitable_Dummy_Recurring::get_instance(), 'reactivate' ) );
+add_action( 'charitable_recurring_reactivate_dummy_donation', array( Charitable_Dummy_Recurring::get_instance(), 'reactivate' ) );
