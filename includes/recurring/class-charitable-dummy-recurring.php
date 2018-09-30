@@ -39,7 +39,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Dummy_Recurring();
+				self::$instance = new self();
 			}
 
 			return self::$instance;
