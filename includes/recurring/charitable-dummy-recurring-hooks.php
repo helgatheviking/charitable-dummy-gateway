@@ -33,7 +33,7 @@ add_filter( 'charitable_recurring_create_gateway_plan_dummy', array( Charitable_
  *
  * @see     Charitable_Dummy_Recurring::can_suspend()
  */
-add_filter( 'charitable_recurring_can_suspend', array( Charitable_Dummy_Recurring::get_instance(), 'can_suspend' ), 10, 2 );
+add_filter( 'charitable_recurring_can_suspend_dummy', array( Charitable_Dummy_Recurring::get_instance(), 'can_suspend' ), 10, 2 );
 
 /**
  * Suspend donation in the gateway.
@@ -47,21 +47,21 @@ add_action( 'charitable_recurring_suspend_dummy_donation', array( Charitable_Dum
  *
  * @see     Charitable_Dummy_Recurring::can_cancel()
  */
-add_filter( 'charitable_recurring_can_cancel', array( Charitable_Dummy_Recurring::get_instance(), 'can_cancel' ), 10, 2 );
+add_filter( 'charitable_recurring_can_cancel_dummy', array( Charitable_Dummy_Recurring::get_instance(), 'can_cancel' ), 10, 2 );
 
 /**
  * Cancel donation in the gateway.
  *
  * @see     Charitable_Dummy_Recurring::cancel()
  */
-add_action( 'charitable_recurring_cancel_dummy_donation', array( Charitable_Dummy_Recurring::get_instance(), 'cancel' ) );
+add_action( 'charitable_process_cancellation_dummy', array( Charitable_Dummy_Recurring::get_instance(), 'cancel' ) );
 
 /**
  * Donation can be reactivated in gateway.
  *
  * @see     Charitable_Dummy_Recurring::can_reactivate()
  */
-add_filter( 'charitable_recurring_can_reactivate', array( Charitable_Dummy_Recurring::get_instance(), 'can_reactivate' ), 10, 2 );
+add_filter( 'charitable_recurring_can_reactivate_dummy', array( Charitable_Dummy_Recurring::get_instance(), 'can_reactivate' ), 10, 2 );
 
 /**
  * Reactivate donation in the gateway.
@@ -69,3 +69,10 @@ add_filter( 'charitable_recurring_can_reactivate', array( Charitable_Dummy_Recur
  * @see     Charitable_Dummy_Recurring::reactivate()
  */
 add_action( 'charitable_recurring_reactivate_dummy_donation', array( Charitable_Dummy_Recurring::get_instance(), 'reactivate' ) );
+
+/**
+ * Renew donation on scheduled chron hook.
+ *
+ * @see     Charitable_Dummy_Recurring::renew()
+ */
+add_action( 'charitable_recurring_process_dummy_renewal', array( Charitable_Dummy_Recurring::get_instance(), 'renew' ) );

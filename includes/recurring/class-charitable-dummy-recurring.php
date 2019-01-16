@@ -80,6 +80,9 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 
 			$recurring->update_status( 'charitable-active' );
 
+			// Schedule first renewal.
+			wp_schedule_single_event( $recurring->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $recurring ) );
+
 			return true;
 
 		}
@@ -120,7 +123,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @since   1.0.1
 		 */
 		public function can_suspend( $can, $donation ) {
-			if( $donation->get_gateway() === 'dummy' && ! empty( $donation->get_gateway_subscription_id() ) && charitable_recurring_is_approved_status( $donation->get_status() ) ) {
+			if( $can && ! empty( $donation->get_gateway_subscription_id() ) && charitable_recurring_is_approved_status( $donation->get_status() ) ) {
 				$can = true;
 			}
 			return $can;
@@ -147,10 +150,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @access  public
 		 * @since   1.0.1
 		 */
-		public function can_cancel( $can, $donation ) {
-			if( $donation->get_gateway() === 'dummy' && ! empty( $donation->get_gateway_subscription_id() ) && charitable_recurring_is_cancellable_status( $donation->get_status() ) ) {
-				$can = true;
-			}
+		public function can_cancel( $can, $donation ) { error_log('gateway filter = ' .json_encode($can));
 			return $can;
 		}
 
@@ -194,6 +194,26 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 			return true;
 		}
 
+		/**
+		 * Trigger renewal on cron and schedule next task.
+		 *
+		 * @param   array                         $args['donation'] = Charitable_Recurring_Donation
+		 * @return  void
+		 * @access  public
+		 * @since   1.1.0
+		 */
+		public function renew( $args ) {
+
+			$recurring 	  = $args[ 'donation' ];
+
+			$recurring->renew();
+
+			// Schedule first renewal.
+			wp_schedule_single_event( $recurring->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $recurring ) );
+
+			return true;
+
+		}
 	}
 
 endif;
