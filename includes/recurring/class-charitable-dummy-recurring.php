@@ -81,7 +81,9 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 			$recurring->update_status( 'charitable-active' );
 
 			// Schedule first renewal.
-			wp_schedule_single_event( $recurring->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $recurring ) );
+			if( is_callable( array( $recurring, 'get_expiration_date' ) ) ) {
+				wp_schedule_single_event( $recurring->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $recurring ) );
+			}
 
 			return true;
 
@@ -208,8 +210,10 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 
 			$recurring->renew();
 
-			// Schedule first renewal.
-			wp_schedule_single_event( $recurring->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $recurring ) );
+			// Schedule nex renewal.
+			if( is_callable( array( $recurring, 'get_expiration_date' ) ) ) {
+				wp_schedule_single_event( $recurring->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $recurring ) );
+			}
 
 			return true;
 
