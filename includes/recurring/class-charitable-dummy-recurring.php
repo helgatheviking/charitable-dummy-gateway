@@ -152,7 +152,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @access  public
 		 * @since   1.0.1
 		 */
-		public function can_cancel( $can, $donation ) { error_log('gateway filter = ' .json_encode($can));
+		public function can_cancel( $can, $donation ) {
 			return $can;
 		}
 
