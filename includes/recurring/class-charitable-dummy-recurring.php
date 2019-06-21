@@ -199,20 +199,18 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		/**
 		 * Trigger renewal on cron and schedule next task.
 		 *
-		 * @param   array                         $args['donation'] = Charitable_Recurring_Donation
+		 * @param   obj Charitable_Recurring_Donation $donation
 		 * @return  void
 		 * @access  public
 		 * @since   1.1.0
 		 */
-		public function renew( $args ) {
+		public function renew( $donation ) {
 
-			$recurring 	  = $args[ 'donation' ];
-
-			$recurring->renew();
+			$donation->renew();
 
 			// Schedule nex renewal.
-			if( is_callable( array( $recurring, 'get_expiration_date' ) ) ) {
-				wp_schedule_single_event( $recurring->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $recurring ) );
+			if( is_callable( array( $donation, 'get_expiration_date' ) ) ) {
+				wp_schedule_single_event( $donation->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $donation ) );
 			}
 
 			return true;
