@@ -2,7 +2,7 @@
 /**
  * Add recurring donations support.
  *
- * @version     1.0.1
+ * @version     1.0.2
  * @package     Charitable Dummy/Classes/Charitable_Dummy_Recurring
  * @author      Kathy Darling
  * @copyright   Copyright (c) 2018, Kathy Darling
