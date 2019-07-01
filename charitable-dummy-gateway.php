@@ -1,20 +1,20 @@
 <?php
 /**
  * Plugin Name: 		Charitable - Dummy Payment Gateway
- * Plugin URI: 			https://www.wpcharitable.com/extensions/charitable-dummy/
+ * Plugin URI: 			https://github.com/helgatheviking/charitable-dummy-gateway
  * Description: 		Adds the ability to test Charitable donations without spending any money.
- * Version: 			1.0.0
+ * Version: 			1.0.2
  * Author: 				Kathy Darling
  * Author URI: 			https://www.kathyisawesome.com/
- * Requires at least: 	4.8
- * Tested up to: 		4.9
+ * Requires at least: 	5.0.0
+ * Tested up to: 		5.2.0
  *
  * Text Domain: 		charitable-dummy
  * Domain Path: 		/languages/
  *
  * @package 			Charitable Dummy Gateway
  * @category 			Core
- * @author 				Studio164a
+ * @author 				Kathy Darling
  */
 
 // Exit if accessed directly.
