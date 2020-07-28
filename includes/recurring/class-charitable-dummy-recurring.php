@@ -209,7 +209,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 			$donation->create_renewal_donation( [ 'status' => 'charitable-completed' ] );
 			$donation->renew();
 
-			// Schedule nex renewal.
+			// Schedule next renewal.
 			if( is_callable( array( $donation, 'get_expiration_date' ) ) ) {
 				wp_schedule_single_event( $donation->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $donation ) );
 			}
