@@ -206,6 +206,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 */
 		public function renew( $donation ) {
 
+			$donation->create_renewal_donation( [ 'status' => 'charitable-completed' ] );
 			$donation->renew();
 
 			// Schedule nex renewal.
