@@ -34,7 +34,6 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Dummy_Recurring
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public static function get_instance() {
@@ -52,7 +51,6 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @param   int                           $donation_id The donation ID.
 		 * @param   Charitable_Donation_Processor $processor The Donation Processor helper.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function maybe_process_recurring_donation( $return, $donation_id, Charitable_Donation_Processor $processor ) {
@@ -81,7 +79,7 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 			$recurring->update_status( 'charitable-active' );
 
 			// Schedule first renewal.
-			if( is_callable( array( $recurring, 'get_renewal_date' ) ) ) {
+			if ( is_callable( array( $recurring, 'get_renewal_date' ) ) ) {
 				wp_schedule_single_event( $recurring->get_renewal_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $recurring ) );
 			}
 
@@ -121,11 +119,10 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @param   bool $can
 		 * @param   obj Charitable_Recurring_Donation $donation
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.1
 		 */
 		public function can_suspend( $can, $donation ) {
-			if( $can && ! empty( $donation->get_gateway_subscription_id() ) && charitable_recurring_is_approved_status( $donation->get_status() ) ) {
+			if ( $can && ! empty( $donation->get_gateway_subscription_id() ) && charitable_recurring_is_approved_status( $donation->get_status() ) ) {
 				$can = true;
 			}
 			return $can;
@@ -136,7 +133,6 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 *
 		 * @param   obj Charitable_Recurring_Donation $donation
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.1
 		 */
 		public function suspend( $donation ) {
@@ -149,7 +145,6 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @param   bool $can
 		 * @param   obj Charitable_Recurring_Donation $donation
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.1
 		 */
 		public function can_cancel( $can, $donation ) {
@@ -161,7 +156,6 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 *
 		 * @param   obj Charitable_Recurring_Donation $donation
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.1
 		 */
 		public function cancel( $donation ) {
@@ -174,11 +168,10 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * @param   bool $can
 		 * @param   obj Charitable_Recurring_Donation $donation
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.1
 		 */
 		public function can_reactivate( $can, $donation ) {
-			if( $donation->get_gateway() === 'dummy' && ! empty( $donation->get_gateway_subscription_id() ) && 'charitable-suspended' == $donation->get_status() ) {
+			if ( $donation->get_gateway() === 'dummy' && ! empty( $donation->get_gateway_subscription_id() ) && 'charitable-suspended' == $donation->get_status() ) {
 				$can = true;
 			}
 			return $can;
@@ -189,7 +182,6 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 *
 		 * @param   obj Charitable_Recurring_Donation $donation
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.1
 		 */
 		public function reactivate( $donation ) {
@@ -200,8 +192,6 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 * Trigger renewal on cron and schedule next task.
 		 *
 		 * @param   obj Charitable_Recurring_Donation $donation
-		 * @return  void
-		 * @access  public
 		 * @since   1.1.0
 		 */
 		public function renew( $donation ) {
