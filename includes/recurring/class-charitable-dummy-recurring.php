@@ -206,15 +206,18 @@ if ( ! class_exists( 'Charitable_Dummy_Recurring' ) ) :
 		 */
 		public function renew( $donation ) {
 
-			$donation->create_renewal_donation( [ 'status' => 'charitable-completed' ] );
-			$donation->renew();
+			// Only renew if active.
+			if ( $donation->has_status( 'charitable-active' ) ) {
 
-			// Schedule next renewal.
-			if( is_callable( array( $donation, 'get_expiration_date' ) ) ) {
-				wp_schedule_single_event( $donation->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $donation ) );
+				$donation->create_renewal_donation( [ 'status' => 'charitable-completed' ] );
+				$donation->renew();
+
+				// Schedule next renewal if still active.
+				if ( $donation->has_status( 'charitable-active' ) && is_callable( array( $donation, 'get_expiration_date' ) ) ) {
+					wp_schedule_single_event( $donation->get_expiration_date( 'U' ), 'charitable_recurring_process_dummy_renewal', array( 'donation' => $donation ) );
+				}
+
 			}
-
-			return true;
 
 		}
 	}
